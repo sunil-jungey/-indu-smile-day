@@ -56,11 +56,21 @@ document
         "click",
         function () {
 
-            showScene("photoOne");
+            showScene("smilePhotoOne");
 
         }
     );
 
+document
+    .getElementById("smilePhotoNext")
+    .addEventListener(
+        "click",
+        function () {
+
+            showScene("photoOne");
+
+        }
+    );
 
 document
     .getElementById("photoTwoButton")
