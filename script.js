@@ -326,3 +326,277 @@ window.addEventListener("load", () => {
     startInduFlow();
   }, 6500);
 });
+/* =========================================
+   CONTINUOUS INDU🥰 FORMATION
+   ========================================= */
+
+const induLetters = [
+    "I",
+    "N",
+    "D",
+    "U",
+    "🥰"
+];
+
+function randomRange(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+
+function createInduFormation(
+    layer,
+    left,
+    top,
+    delay
+) {
+
+    const group =
+        document.createElement("div");
+
+    group.className =
+        "indu-group";
+
+    group.style.left =
+        left + "px";
+
+    group.style.top =
+        top + "px";
+
+    layer.appendChild(group);
+
+
+    const pieces = [];
+
+
+    induLetters.forEach(
+        function (letter, index) {
+
+            const piece =
+                document.createElement("span");
+
+            piece.className =
+                "indu-piece";
+
+            piece.textContent =
+                letter;
+
+
+            /* Start scattered */
+
+            piece.style.left =
+                randomRange(
+                    0,
+                    150
+                ) + "px";
+
+            piece.style.top =
+                randomRange(
+                    0,
+                    70
+                ) + "px";
+
+
+            piece.style.animation =
+                `softLetterFloat ${
+                    randomRange(2.4, 4.2)
+                }s ease-in-out infinite alternate`;
+
+
+            group.appendChild(piece);
+
+            pieces.push(piece);
+
+
+            /* Appear */
+
+            setTimeout(
+                function () {
+
+                    piece.classList.add(
+                        "visible"
+                    );
+
+                },
+                delay + index * 90
+            );
+
+        }
+    );
+
+
+    /* Form INDU🥰 */
+
+    setTimeout(
+        function () {
+
+            const startX = 8;
+            const gap = 34;
+            const targetY = 34;
+
+
+            pieces.forEach(
+                function (piece, index) {
+
+                    piece.style.animation =
+                        "none";
+
+
+                    piece.style.left =
+                        (
+                            startX +
+                            index * gap
+                        ) + "px";
+
+
+                    piece.style.top =
+                        targetY + "px";
+
+
+                    piece.classList.add(
+                        "formed"
+                    );
+
+                }
+            );
+
+        },
+        delay + 1900
+    );
+
+
+    /* Hold, then disappear */
+
+    setTimeout(
+        function () {
+
+            pieces.forEach(
+                function (piece) {
+
+                    piece.classList.add(
+                        "fade-away"
+                    );
+
+                }
+            );
+
+        },
+        delay + 3900
+    );
+
+
+    /* Remove group */
+
+    setTimeout(
+        function () {
+
+            group.remove();
+
+        },
+        delay + 4800
+    );
+}
+
+
+function launchInduCycle() {
+
+    const layer =
+        document.getElementById(
+            "induFlowLayer"
+        );
+
+
+    if (!layer) {
+        return;
+    }
+
+
+    const width =
+        window.innerWidth;
+
+    const height =
+        window.innerHeight;
+
+
+    /*
+      4 different areas.
+      Slight random variation each cycle.
+    */
+
+    const positions = [
+
+        {
+            x:
+                width * 0.04 +
+                randomRange(-5, 15),
+
+            y:
+                height * 0.10 +
+                randomRange(-10, 15)
+        },
+
+        {
+            x:
+                width * 0.50 +
+                randomRange(-15, 8),
+
+            y:
+                height * 0.26 +
+                randomRange(-10, 20)
+        },
+
+        {
+            x:
+                width * 0.08 +
+                randomRange(-5, 20),
+
+            y:
+                height * 0.55 +
+                randomRange(-15, 20)
+        },
+
+        {
+            x:
+                width * 0.48 +
+                randomRange(-20, 10),
+
+            y:
+                height * 0.73 +
+                randomRange(-15, 10)
+        }
+
+    ];
+
+
+    positions.forEach(
+        function (position, index) {
+
+            createInduFormation(
+                layer,
+                position.x,
+                position.y,
+                index * 700
+            );
+
+        }
+    );
+}
+
+
+/* Start immediately */
+
+window.addEventListener(
+    "load",
+    function () {
+
+        launchInduCycle();
+
+
+        /* Repeat continuously */
+
+        setInterval(
+            launchInduCycle,
+            7200
+        );
+
+    }
+);
