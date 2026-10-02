@@ -236,3 +236,93 @@ for (let i = 0; i < 25; i++) {
     createParticle();
 
 }
+const induTexts = ["I", "N", "D", "U", "🥰"];
+
+function createInduGroup(parent, x, y, delay = 0) {
+  const group = document.createElement("div");
+  group.className = "indu-group";
+  group.style.left = x + "px";
+  group.style.top = y + "px";
+  parent.appendChild(group);
+
+  const pieces = [];
+
+  induTexts.forEach((text, index) => {
+    const piece = document.createElement("span");
+    piece.className = "indu-piece";
+    piece.textContent = text;
+
+    const randomX = Math.random() * 180;
+    const randomY = Math.random() * 80;
+
+    piece.style.left = randomX + "px";
+    piece.style.top = randomY + "px";
+    piece.style.animation = `tinyFloat ${2 + Math.random() * 2}s ease-in-out infinite alternate`;
+
+    group.appendChild(piece);
+    pieces.push(piece);
+
+    setTimeout(() => {
+      piece.classList.add("show");
+    }, delay + 100);
+  });
+
+  // form INDU🥰
+  setTimeout(() => {
+    const startX = 10;
+    const gap = 36;
+    const finalY = 35;
+
+    pieces.forEach((piece, index) => {
+      piece.style.animation = "none";
+      piece.style.left = (startX + index * gap) + "px";
+      piece.style.top = finalY + "px";
+      piece.classList.add("final");
+    });
+  }, delay + 2200);
+
+  // hold formed text a bit, then fade
+  setTimeout(() => {
+    pieces.forEach(piece => {
+      piece.style.opacity = "0";
+    });
+  }, delay + 4300);
+
+  // remove group after animation
+  setTimeout(() => {
+    group.remove();
+  }, delay + 5600);
+}
+
+function startInduFlow() {
+  const layer = document.getElementById("induFlowLayer");
+  if (!layer) return;
+
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  // clear old groups if any
+  layer.innerHTML = "";
+
+  // 4 positions on screen
+  const positions = [
+    { x: width * 0.10, y: height * 0.15 },
+    { x: width * 0.58, y: height * 0.18 },
+    { x: width * 0.12, y: height * 0.62 },
+    { x: width * 0.55, y: height * 0.68 }
+  ];
+
+  positions.forEach((pos, i) => {
+    createInduGroup(layer, pos.x, pos.y, i * 600);
+  });
+}
+
+// start once page loads
+window.addEventListener("load", () => {
+  startInduFlow();
+
+  // repeat continuously
+  setInterval(() => {
+    startInduFlow();
+  }, 6500);
+});
