@@ -1,0 +1,520 @@
+/* =========================================
+   RESET
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+body {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            160deg,
+            #fffbed,
+            #fff3c7,
+            #ffe6ae
+        );
+    color: #654e31;
+}
+/* =========================================
+   SCENES
+   ========================================= */
+.scene {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding:
+        28px
+        22px
+        105px;
+    overflow: hidden;
+}
+.scene.active {
+    display: flex;
+    animation:
+        sceneIn
+        0.8s
+        cubic-bezier(.22,.8,.25,1)
+        forwards;
+}
+.scene.leaving {
+    display: flex;
+    animation:
+        sceneOut
+        0.45s
+        ease
+        forwards;
+}
+@keyframes sceneIn {
+    from {
+        opacity: 0;
+        transform: scale(1.025);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@keyframes sceneOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.985);
+    }
+}
+/* =========================================
+   BEAUTIFUL WELCOME COVER
+   ========================================= */
+.welcome-scene {
+    padding: 0;
+    background: #000;
+}
+.welcome-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation:
+        welcomeZoom
+        12s
+        ease
+        forwards;
+}
+@keyframes welcomeZoom {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.10);
+    }
+}
+.welcome-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.12) 5%,
+            rgba(0,0,0,0.08) 35%,
+            rgba(0,0,0,0.72) 100%
+        );
+    z-index: 1;
+}
+.welcome-content {
+    position: absolute;
+    left: 50%;
+    bottom: 105px;
+    transform:
+        translateX(-50%);
+    width: 88%;
+    max-width: 430px;
+    text-align: center;
+    z-index: 3;
+    animation:
+        welcomeText
+        1.2s
+        ease;
+}
+@keyframes welcomeText {
+    from {
+        opacity: 0;
+        transform:
+            translateX(-50%)
+            translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+}
+.welcome-small {
+    color:
+        rgba(255,255,255,0.85);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    margin-bottom: 10px;
+}
+.welcome-name {
+    color: white;
+    font-size:
+        clamp(
+            58px,
+            17vw,
+            92px
+        );
+    line-height: 1;
+    margin-bottom: 20px;
+    text-shadow:
+        0 4px 25px
+        rgba(0,0,0,0.35);
+}
+.welcome-message {
+    color: white;
+    font-size: 18px;
+    line-height: 1.55;
+    margin-bottom: 24px;
+    text-shadow:
+        0 3px 15px
+        rgba(0,0,0,0.55);
+}
+.welcome-button {
+    border:
+        1px solid
+        rgba(255,255,255,0.60);
+    border-radius: 50px;
+    padding:
+        15px
+        31px;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    background:
+        rgba(255,255,255,0.17);
+    backdrop-filter:
+        blur(14px);
+    -webkit-backdrop-filter:
+        blur(14px);
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,0.20);
+    cursor: pointer;
+}
+/* =========================================
+   NORMAL CONTENT
+   ========================================= */
+.content {
+    width: 100%;
+    max-width: 430px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+.big-smile {
+    font-size: 72px;
+    margin-bottom: 22px;
+    animation:
+        happyFloat
+        2.7s
+        ease-in-out
+        infinite;
+}
+@keyframes happyFloat {
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+    50% {
+        transform:
+            translateY(-10px)
+            rotate(3deg);
+    }
+}
+.small-title {
+    font-size: 12px;
+    letter-spacing: 2.3px;
+    font-weight: 700;
+    color: #b18a3d;
+    margin-bottom: 15px;
+}
+h2 {
+    font-size:
+        clamp(
+            37px,
+            10vw,
+            52px
+        );
+    line-height: 1.08;
+    color: #7d5b26;
+    margin-bottom: 24px;
+}
+.message {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #755f42;
+    margin-bottom: 30px;
+}
+/* =========================================
+   MAIN BUTTON
+   ========================================= */
+.main-button {
+    border: none;
+    padding:
+        16px
+        32px;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #624611;
+    background:
+        linear-gradient(
+            135deg,
+            #ffe16b,
+            #ffc947
+        );
+    box-shadow:
+        0 12px 30px
+        rgba(190,140,30,0.22);
+    cursor: pointer;
+    transition:
+        transform 0.2s ease;
+}
+.main-button:active,
+.welcome-button:active,
+.glass-button:active {
+    transform: scale(0.94);
+}
+/* =========================================
+   FULL SCREEN PHOTOS
+   ========================================= */
+.photo-scene {
+    padding: 0;
+    background: black;
+}
+.full-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    border-radius: 0;
+    animation:
+        photoZoom
+        9s
+        ease
+        forwards;
+}
+@keyframes photoZoom {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.08);
+    }
+}
+.photo-shade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.02) 40%,
+            rgba(0,0,0,0.76) 100%
+        );
+}
+.photo-text {
+    position: absolute;
+    left: 50%;
+    bottom: 115px;
+    transform:
+        translateX(-50%);
+    width: 88%;
+    text-align: center;
+    z-index: 3;
+}
+.photo-text p {
+    color: white;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+    text-shadow:
+        0 3px 15px
+        rgba(0,0,0,0.75);
+}
+.glass-button {
+    border:
+        1px solid
+        rgba(255,255,255,0.55);
+    border-radius: 50px;
+    padding:
+        14px
+        27px;
+    font-size: 16px;
+    font-weight: 650;
+    color: white;
+    background:
+        rgba(255,255,255,0.17);
+    backdrop-filter:
+        blur(12px);
+    -webkit-backdrop-filter:
+        blur(12px);
+    cursor: pointer;
+}
+/* =========================================
+   VIDEO
+   ========================================= */
+.video-scene {
+    background:
+        linear-gradient(
+            160deg,
+            #fffbed,
+            #ffe8a8
+        );
+}
+.video-wrap {
+    width: 100%;
+    max-width: 430px;
+    text-align: center;
+}
+.video-wrap video {
+    width: 100%;
+    max-height: 57dvh;
+    object-fit: cover;
+    border-radius: 24px;
+    background: black;
+    box-shadow:
+        0 15px 40px
+        rgba(80,60,20,0.18);
+}
+.video-message {
+    margin-top: 20px;
+}
+.video-message p {
+    color: #755f42;
+    font-size: 17px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+/* =========================================
+   FINAL
+   ========================================= */
+.tiny-note {
+    margin-top: 25px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #aa8b50;
+}
+/* =========================================
+   TRANSPARENT FLOATING I N D U 🥰
+   They NEVER form together.
+   ========================================= */
+.name-float {
+    position: fixed;
+    z-index: 50000;
+    pointer-events: none;
+    user-select: none;
+    font-size:
+        var(--float-size);
+    font-weight: 800;
+    /*
+       Transparent / glassy appearance
+    */
+    color:
+        rgba(255,255,255,0.15);
+    -webkit-text-stroke:
+        1.3px
+        rgba(205,72,105,0.55);
+    text-shadow:
+        0 0 9px
+        rgba(255,175,195,0.30);
+    opacity: 0;
+    animation:
+        nameFloatLife
+        var(--float-life)
+        ease-in-out
+        forwards;
+    will-change:
+        transform,
+        opacity;
+}
+/* Tiny heart behind/around letters */
+.name-float::after {
+    content: "♡";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform:
+        translate(-50%,-50%)
+        scale(1.7);
+    color:
+        rgba(255,110,145,0.17);
+    font-size: 1.8em;
+    z-index: -1;
+}
+@keyframes nameFloatLife {
+    0% {
+        opacity: 0;
+        transform:
+            translate(0,12px)
+            rotate(-6deg)
+            scale(0.85);
+    }
+    18% {
+        opacity: 0.55;
+    }
+    45% {
+        opacity: 0.48;
+        transform:
+            translate(
+                var(--float-x1),
+                var(--float-y1)
+            )
+            rotate(4deg)
+            scale(1);
+    }
+    75% {
+        opacity: 0.35;
+        transform:
+            translate(
+                var(--float-x2),
+                var(--float-y2)
+            )
+            rotate(-3deg)
+            scale(1.03);
+    }
+    100% {
+        opacity: 0;
+        transform:
+            translate(
+                var(--float-x3),
+                var(--float-y3)
+            )
+            rotate(5deg)
+            scale(1.10);
+    }
+}
+/* =========================================
+   IPHONE
+   ========================================= */
+@media (max-width: 600px) {
+    .message {
+        font-size: 17px;
+    }
+    .big-smile {
+        font-size: 64px;
+    }
+    .photo-text p {
+        font-size: 19px;
+    }
+    .welcome-content {
+        bottom: 110px;
+    }
+    .welcome-message {
+        font-size: 17px;
+    }
+}
