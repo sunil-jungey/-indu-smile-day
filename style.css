@@ -515,3 +515,104 @@ h2 {
   75%  { transform: translate(8px, 4px); }
   100% { transform: translate(-5px, -6px); }
 }
+/* =========================================
+   CONTINUOUS INDU🥰 FLOATING FORMATION
+   ========================================= */
+
+.indu-flow-layer {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100dvh;
+
+    pointer-events: none;
+    overflow: hidden;
+
+    z-index: 50000;
+}
+
+.indu-group {
+    position: absolute;
+
+    width: 190px;
+    height: 105px;
+
+    pointer-events: none;
+}
+
+.indu-piece {
+    position: absolute;
+
+    font-size: 27px;
+    font-weight: 800;
+
+    color: #b94d6d;
+
+    opacity: 0;
+
+    text-shadow:
+        0 4px 14px
+        rgba(185, 77, 109, 0.20);
+
+    transition:
+        left 1.55s cubic-bezier(.2,.8,.2,1),
+        top 1.55s cubic-bezier(.2,.8,.2,1),
+        opacity 0.7s ease,
+        transform 1.55s ease;
+
+    will-change:
+        left,
+        top,
+        opacity,
+        transform;
+}
+
+.indu-piece.visible {
+    opacity: 0.85;
+}
+
+.indu-piece.formed {
+    opacity: 1;
+
+    transform:
+        scale(1.08);
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,0.75),
+        0 0 18px rgba(255,200,215,0.55);
+}
+
+.indu-piece.fade-away {
+    opacity: 0;
+
+    transform:
+        scale(1.18);
+}
+
+@keyframes softLetterFloat {
+
+    0% {
+        transform:
+            translate(0, 0)
+            rotate(-5deg);
+    }
+
+    33% {
+        transform:
+            translate(8px, -10px)
+            rotate(3deg);
+    }
+
+    66% {
+        transform:
+            translate(-7px, 7px)
+            rotate(-3deg);
+    }
+
+    100% {
+        transform:
+            translate(5px, -5px)
+            rotate(2deg);
+    }
+}
